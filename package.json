@@ -1,23 +1,19 @@
 {
   "name": "crewstalker-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "CrewStalker.com backend",
   "main": "index.js",
-  "scripts": {"scripts": {
-  "start": "node index.js",
-  "build": "npm install"
-},
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@supabase/supabase-js": "^2.105.3",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "multer": "^2.1.1",
-    "node-cron": "^4.2.1",
+    "@supabase/supabase-js": "^2.39.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
     "web-push": "^3.6.7"
   }
 }
