@@ -64,7 +64,7 @@ app.post('/analyze', upload.single('photo'), async (req, res) => {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-opus-4-5',
+        model: 'claude-sonnet-4-5-20250929',
         max_tokens: 1000,
         system: `You are an expert flight schedule parser. Extract ALL flights from the image.
 Return ONLY a valid JSON array. No markdown, no explanation, no backticks.
