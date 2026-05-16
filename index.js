@@ -137,6 +137,38 @@ app.get('/flights', async (req, res) => {
   }
 });
 
+
+// ---------------------------------------------------------
+// ROUTE: Save manually entered flights
+// POST /flights/manual
+// ---------------------------------------------------------
+app.post('/flights/manual', async (req, res) => {
+  try {
+    const user = await getUser(req);
+    if (!user) return res.status(401).json({ error: 'Not logged in' });
+    const { flights } = req.body;
+    if (!Array.isArray(flights) || flights.length === 0) return res.status(400).json({ error: 'No flights provided' });
+    await supabase.from('flights').delete().eq('user_id', user.id);
+    const rows = flights.map(f => ({
+      flight_number: f.flightNumber,
+      airline: f.airline,
+      origin: f.origin,
+      destination: f.destination,
+      departure_time: f.departureTime,
+      arrival_time: f.arrivalTime,
+      flight_date: f.date,
+      gate: f.gate,
+      status: f.status,
+      user_id: user.id
+    }));
+    const { error } = await supabase.from('flights').insert(rows);
+    if (error) throw error;
+    res.json({ success: true, flights });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ─────────────────────────────────────────────────────────
 // ROUTE: Save push subscription
 // POST /subscribe
